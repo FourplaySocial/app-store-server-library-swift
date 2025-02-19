@@ -50,7 +50,7 @@ public class AppStoreServerAPIClient {
             self.url = AppStoreServerAPIClient.sandboxUrl
             break
         }
-        self.client = .init()
+        self.client = .init(eventLoopGroupProvider: .singleton)
     }
     
     deinit {
