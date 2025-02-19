@@ -7,6 +7,7 @@ import JWTKit
 import Crypto
 import AsyncHTTPClient
 import NIOFoundationCompat
+import NIOCore
 
 struct ChainVerifier {
     
@@ -145,7 +146,7 @@ final class AppStoreOIDPolicy: VerifierPolicy {
 final class Requester: OCSPRequester {
     func query(request: [UInt8], uri: String) async -> X509.OCSPRequesterQueryResult {
         do {
-            let httpClient = HTTPClient(eventLoopGroupProvider: .singleton)
+            let httpClient = HTTPClient(eventLoopGroupProvider: .createNew)
             defer {
                 try? httpClient.syncShutdown()
             }
