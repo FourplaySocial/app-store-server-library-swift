@@ -154,7 +154,7 @@ final class Requester: OCSPRequester {
             urlRequest.method = .POST
             urlRequest.headers.add(name: "Content-Type", value: "application/ocsp-request")
             urlRequest.body = .bytes(request)
-            let response = try await httpClient.execute(urlRequest, timeout: EventLoop.TimeAmount.seconds(30))
+            let response = try await httpClient.execute(urlRequest, timeout: NIOCore.TimeAmount.seconds(30))
             var body = try await response.body.collect(upTo: 1024 * 1024)
             guard let data = body.readData(length: body.readableBytes) else {
                 throw OCSPFetchError()
